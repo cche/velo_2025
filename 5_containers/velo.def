@@ -1,0 +1,8 @@
+Bootstrap: docker
+From: python:3.11-slim
+
+%post
+    python -m pip install --no-cache-dir numpy pandas matplotlib
+
+%runscript
+    exec python "$@"
