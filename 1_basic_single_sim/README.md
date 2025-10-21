@@ -15,3 +15,5 @@ python main.py \
 Outputs:
 - results.csv: time series with columns: time, mailly, moulin
 - mailly.png: plot of counts over time (if --plot)
+
+In container
