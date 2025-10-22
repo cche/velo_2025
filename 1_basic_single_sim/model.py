@@ -56,7 +56,7 @@ def step(state: State, p1: float, p2: float, rng: np.random.Generator) -> State:
 
 
 def run_simulation(
-    initial: State, steps: int, p1: float, p2: float, seed: int
+    init_mailly: int, init_moulin: int, steps: int, p1: float, p2: float, seed: int
 ) -> Dict[str, list[int]]:
     """Run a complete bike-sharing simulation.
 
@@ -80,13 +80,10 @@ def run_simulation(
         - Record state at each time step for the DataFrame
         - Calculate final imbalance as mailly - moulin
     """
-    print("Running simulation...")
-
-    # Generer un generator de nombres aleatoires avec le seed
     rng = np.random.default_rng(seed)
 
     metrics = {}
-    state = initial
+    state = State(init_mailly, init_moulin)
     for time in range(steps):
         state = step(state, p1, p2, rng)
         metrics[time] = [

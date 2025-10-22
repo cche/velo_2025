@@ -62,7 +62,8 @@ def main():
 
     state = State(options.init_mailly, options.init_moulin)
     metrics = run_simulation(
-        state,
+        options.init_mailly,
+        options.init_moulin,
         options.steps,
         options.p1,
         options.p2,
@@ -108,30 +109,30 @@ def main():
         plt.legend()
         plt.savefig(metrics_path.with_suffix(".png"))
 
-        fig, (ax1, ax2, ax3) = plt.subplots(3, 1)
-        fig.set_size_inches(12, 8)
-        fig.subplots_adjust(hspace=0.5)
-        ax1.plot(time, mailly, label="Mailly")
-        ax1.plot(time, moulin, label="Moulin")
-        ax1.set_title("Velos Mailly-Moulin")
-        ax1.set_xlabel("Temps")
-        ax1.set_ylabel("nombre")
-        ax1.legend()
-
-        ax2.plot(time, unmet_mailly, label="Unmet Mailly")
-        ax2.plot(time, unmet_moulin, label="Unmet Moulin")
-        ax2.set_title("Unmet Mailly-Moulin")
-        ax2.set_xlabel("Temps")
-        ax2.set_ylabel("nombre")
-        ax2.legend()
-
-        ax3.plot(time, balance, label="Balance")
-        ax3.set_title("Balance Mailly-Moulin")
-        ax3.axhline(y=0, color="black", linestyle="--")
-        ax3.set_xlabel("Temps")
-        ax3.set_ylabel("nombre")
-        ax3.legend()
-        plt.savefig(metrics_path.parent / (metrics_path.stem + "_3plot.png"))
+        # fig, (ax1, ax2, ax3) = plt.subplots(3, 1)
+        # fig.set_size_inches(12, 8)
+        # fig.subplots_adjust(hspace=0.5)
+        # ax1.plot(time, mailly, label="Mailly")
+        # ax1.plot(time, moulin, label="Moulin")
+        # ax1.set_title("Velos Mailly-Moulin")
+        # ax1.set_xlabel("Temps")
+        # ax1.set_ylabel("nombre")
+        # ax1.legend()
+        #
+        # ax2.plot(time, unmet_mailly, label="Unmet Mailly")
+        # ax2.plot(time, unmet_moulin, label="Unmet Moulin")
+        # ax2.set_title("Unmet Mailly-Moulin")
+        # ax2.set_xlabel("Temps")
+        # ax2.set_ylabel("nombre")
+        # ax2.legend()
+        #
+        # ax3.plot(time, balance, label="Balance")
+        # ax3.set_title("Balance Mailly-Moulin")
+        # ax3.axhline(y=0, color="black", linestyle="--")
+        # ax3.set_xlabel("Temps")
+        # ax3.set_ylabel("nombre")
+        # ax3.legend()
+        # plt.savefig(metrics_path.parent / (metrics_path.stem + "_3plot.png"))
 
 
 if __name__ == "__main__":
