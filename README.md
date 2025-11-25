@@ -110,10 +110,10 @@ python run_serial.py --params params.csv --out-dir results/ --plot
 **Implement:**
 
 1. **`model.py`**: Extended with unmet metrics
-2. **`run_parallel.py`**:
-   - `worker()`: Function for parallel execution
-   - Use `ProcessPoolExecutor` for CPU-bound parallelization
-   - Handle result collection from multiple processes
+2. **`run_*.py`**:
+   - `main()`: Implement logic for parallel execution
+   - Use `threads`, `multiprocessing` and `mpi` for CPU-bound parallelization
+   - Handle result collection from multiple processe
 
 **Test your implementation:**
 
@@ -124,7 +124,7 @@ python run_parallel.py --params params.csv --out-dir results/ --workers 4 --plot
 
 ### Phase 4: Cluster Computing (4_cluster_slurm/)
 
-**Implement:**
+**We will not implement this phase**
 
 1. **`run_one.py`**: Execute single simulation from parameter file row
 2. **`collect_results.py`**: Aggregate distributed results
@@ -140,24 +140,18 @@ sbatch sweep_array.sbatch
 python collect_results.py --in-dir results/ --out-dir aggregated/ --plot
 ```
 
-### Phase 5: Containerization (5_containers/)
-
-**Explore:**
-
-- Container definitions for reproducible deployment
-- Portable execution environments
-
 ## Expected Outputs
 
 Each phase should produce:
 
-- **Timeseries data**: CSV files with bike counts over time
-- **Metrics**: Performance and behavior statistics
+- **Metrics**: CSV files with bike counts over time
 - **Visualizations**: Plots showing simulation results
-- **Aggregated results**: Combined data from multiple runs
+- **Aggregated results**: Combined data from multiple runs in Metrics file.
 
 ## Key Metrics Tracked
 
+- mailly_counts: Bike counts at Mailly station
+- moulin_counts: Bike counts at Moulin station
 - `unmet_mailly`: Unmet demand at Mailly station
 - `unmet_moulin`: Unmet demand at Moulin station
 - `final_imbalance`: Final difference in bike counts between stations
@@ -180,20 +174,29 @@ if rng.random() < probability:
     # Execute action
 ```
 
-### DataFrame Construction
+### DataFrame Usage
+
+Instead of dictionary, you can use `pandas.DataFrame` that might facilitate plotting.
 
 ```python
+# Accuamulate the time and count data in lists and construct the dataframe
 df = pd.DataFrame({
     "time": times,
     "mailly": mailly_counts,
     "moulin": moulin_counts
+    "unmet_mailly": unmet_mailly,
+    "unmet_moulin": unmet_moulin
 })
 ```
 
 ### Metrics Tracking
 
+Using dictionary
+
 ```python
 metrics = {
+    "mailly",
+    "moulin",
     "unmet_mailly": 0,
     "unmet_moulin": 0,
     "final_imbalance": 0
@@ -215,6 +218,9 @@ Required Python packages:
 - `pandas`: Data manipulation and CSV I/O
 - `matplotlib`: Plotting and visualization
 - `concurrent.futures`: Parallel processing (built-in)
+- `threading`: Multithreading (built-in)
+- `multiprocessing`: Local multiprocessing (built-in)
+- `mpi4py`: MPI support (optional)
 
 Install with:
 
@@ -228,7 +234,7 @@ pip install numpy pandas matplotlib
 2. Install dependencies
 3. Start with Phase 1 (`1_basic_single_sim/`)
 4. Read the docstrings carefully for implementation guidance
-5. Test each function individually before integration
+5. Test each function individually before making a Pull request
 6. Progress through phases sequentially
 
 Good luck with your implementation!
